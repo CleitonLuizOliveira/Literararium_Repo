@@ -1,0 +1,36 @@
+# Ambiente Virtual
+grupo-x/
+venv/
+env/
+*.env
+.env
+
+# Arquivos compilados do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Arquivos de banco de dados (se estiver usando sqlite para desenvolvimento e não quiser versioná-lo)
+*.sqlite3
+db.sqlite3
+
+# Arquivos de IDEs e editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Django specific
+*.log
+local_settings.py # Se você usar um para configurações locais/sensíveis
+staticfiles/ # Geralmente gerado pelo collectstatic, não precisa versionar se puder ser recriado
+media/ # A menos que sejam arquivos de mídia estáticos do projeto que você queira versionar
+
+# Outros
+pip-log.txt
+pip-delete-this-directory.txt
+celerybeat-schedule
