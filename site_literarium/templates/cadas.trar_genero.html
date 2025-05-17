@@ -1,0 +1,50 @@
+{% extends "template_cadastros.html" %}
+
+{% block title %}Cadastro de Autor{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="title">
+        <svg viewBox="0 0 87 19" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="87" height="19" rx="9.5" fill="#F26510" />
+        </svg>
+        <h1>Cadastrar Gênero</h1>
+    </div>
+
+    <form>
+        <div class="form-group">
+            <label class="form-label" for="titulo">Gênero</label>
+            <input type="text" id="genero" name="genero" placeholder="Digite o novo Gênero" autocomplete="off" />
+        </div>
+       
+
+        <button type="submit">Salvar</button>
+    </form>
+</div>
+
+<script>
+    const coverUpload = document.querySelector('.cover-upload');
+    const fileInput = document.getElementById('cover-file');
+
+    coverUpload.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        coverUpload.style.borderColor = '#f98125';
+        coverUpload.style.backgroundColor = '#fff7eb';
+    });
+
+    coverUpload.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        coverUpload.style.borderColor = '#ccc';
+        coverUpload.style.backgroundColor = '#fafafa';
+    });
+
+    coverUpload.addEventListener('drop', (e) => {
+        e.preventDefault();
+        coverUpload.style.borderColor = '#ccc';
+        coverUpload.style.backgroundColor = '#fafafa';
+        if (e.dataTransfer.files.length) {
+            fileInput.files = e.dataTransfer.files;
+        }
+    });
+</script>
+{% endblock %}

@@ -23,4 +23,6 @@ urlpatterns = [
     path('cadastrar-livro/', cadastrar_livro, name='cadastrar_livro'),
     path('cadastrar-bibliotecario/', cadastrar_bibliotecario, name='cadastrar_bibliotecario'),
     path('cadastrar-autor/', cadastrar_autor, name='cadastrar_autor'),
+     path('cadastrar-genero/', cadastrar_genero, name='cadastrar_genero'),
+]
 ]
