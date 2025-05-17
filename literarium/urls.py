@@ -21,4 +21,5 @@ from site_literarium.views import cadastrar_livro
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cadastrar-livro/', cadastrar_livro, name='cadastrar_livro'),
+    path('cadastrar-bibliotecario/', views.cadastrar_bibliotecario, name='cadastrar_bibliotecario'),
 ]
