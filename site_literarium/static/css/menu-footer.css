@@ -1,0 +1,159 @@
+:root {
+      --primary-color: #F26510;
+      --background-color: #fff;
+      --text-color: #000;
+      --header-bg: #fff;
+      --menu-hover: #f6f6f6;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    header {
+      background-color: var(--header-bg);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      max-height: 48px; 
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      position: relative;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 120%;
+      left: 0;
+      background-color: #fff;
+      min-width: 200px;
+      border-radius: 6px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .dropdown-content a {
+      padding: 12px 16px;
+      color: var(--text-color);
+      text-decoration: none;
+      display: block;
+      transition: background 0.2s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--menu-hover);
+    }
+
+    nav > a, .dropdown > a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      transition: color 0.2s;
+      position: relative;
+      cursor: pointer;
+    }
+
+    nav > a:hover, .dropdown > a:hover {
+      color: var(--primary-color);
+    }
+
+    nav > a::after, .dropdown > a::after {
+      content: '';
+      display: block;
+      height: 2px;
+      background: var(--primary-color);
+      width: 0;
+      transition: width 0.3s ease;
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+    }
+
+    nav > a:hover::after, .dropdown > a:hover::after {
+      width: 100%;
+    }
+
+    .icons {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .icons img {
+      width: 32px;  
+      height: 32px;
+      object-fit: contain;
+      cursor: pointer;
+      transition: transform 0.2s;
+      display: block;
+    }
+
+    .icons img:hover {
+      transform: scale(1.1);
+    }
+
+    main {
+      flex: 1;
+      padding: 40px 32px;
+    }
+
+    main h1 {
+      font-size: 32px;
+      color: var(--primary-color);
+      margin-bottom: 16px;
+    }
+
+    footer {
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      font-size: 14px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-logos {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .footer-logos img {
+      max-height: 36px;  
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }

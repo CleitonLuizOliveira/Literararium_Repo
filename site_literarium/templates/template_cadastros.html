@@ -1,18 +1,68 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Template Base{% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Literarium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/menu-footer.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/content.css' %}" />
 </head>
-
 <body>
-    {% block content %}
-    <!-- Conteúdo da página -->
-    {% endblock %}
-</body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'img/logo_literarium.png' %}" alt="Logo Literarium" />
+        </div>
+        <nav>
+            <div class="dropdown">
+                <a href="#" onclick="toggleDropdown(event)">Cadastros</a>
+                <div class="dropdown-content" id="dropdown-cadastros">
+                    <a href="#">Aluno</a>
+                    <a href="#">Bibliotecário</a>
+                    <a href="#">Livro</a>
+                    <a href="#">Gênero</a>
+                    <a href="#">Autor</a>
+                </div>
+            </div>
+            <a href="#">Operações</a>
+            <a href="#">Relatórios</a>
+        </nav>
+        <div class="icons">
+            <img src="{% static 'img/notifications_icon.png' %}" alt="Notificações" />
+            <img src="{% static 'img/profile_avatar.png' %}" alt="Usuário" />
+        </div>
+    </header>
 
+    <main>
+        {% block content %}
+        <h1>Bem-vindo ao Literarium!</h1>
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="footer-logos">
+            <img src="{% static 'img/logo_udesc.png' %}" alt="UDESC" />
+            <img src="{% static 'img/logo_ideologia.png' %}" alt="Colégio Ideologia" />
+        </div>
+        <div>
+            Copyright © 2025 Colégio Ideologia
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown(event) {
+            event.preventDefault();
+            const dropdown = document.getElementById('dropdown-cadastros');
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        window.addEventListener('click', function (e) {
+            const dropdown = document.getElementById('dropdown-cadastros');
+            if (!e.target.closest('.dropdown')) {
+                dropdown.style.display = 'none';
+            }
+        });
+    </script>
+</body>
 </html>
