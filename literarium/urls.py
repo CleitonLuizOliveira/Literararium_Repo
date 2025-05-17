@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from site_literarium.views import cadastrar_livro
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('cadastrar-livro/', cadastrar_livro, name='cadastrar_livro'),
 ]

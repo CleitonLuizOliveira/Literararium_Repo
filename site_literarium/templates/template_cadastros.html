@@ -1,23 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template Base</title>
+    <title>{% block title %}Template Base{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
-    <form action="">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
-        
-        <label for="sobrenome">Sobrenome:</label>
-        <input type="text" id="sobrenome" name="sobrenome" required>
-        
-        <label for="nacionalidade">Nacionalidade:</label>
-        <input type="text" id="nacionalidade" name="nacionalidade" required>
-        
-        <button type="submit">Cadastrar Autor</button>
-    </form>
-    
+    {% block content %}
+    <!-- Conteúdo da página -->
+    {% endblock %}
 </body>
+
 </html>
