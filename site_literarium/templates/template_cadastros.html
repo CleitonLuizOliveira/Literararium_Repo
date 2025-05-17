@@ -19,8 +19,8 @@
                 <a href="#" onclick="toggleDropdown(event)">Cadastros</a>
                 <div class="dropdown-content" id="dropdown-cadastros">
                     <a href="#">Aluno</a>
-                    <a href="#">Bibliotecário</a>
-                    <a href="#">Livro</a>
+                    <a href="{% url 'cadastrar_bibliotecario' %}">Bibliotecário</a>
+                    <a href="{% url 'cadastrar_livro' %}">Livro</a>
                     <a href="#">Gênero</a>
                     <a href="#">Autor</a>
                 </div>
