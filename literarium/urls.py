@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from site_literarium.views import cadastrar_livro, cadastrar_bibliotecario , cadastrar_autor, cadastrar_genero
+from site_literarium.views import cadastrar_livro, cadastrar_bibliotecario , cadastrar_autor, cadastrar_genero, cadastrar_aluno
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('cadastrar-aluno/', cadastrar_aluno, name='cadastrar_aluno'),
     path('cadastrar-livro/', cadastrar_livro, name='cadastrar_livro'),
     path('cadastrar-bibliotecario/', cadastrar_bibliotecario, name='cadastrar_bibliotecario'),
     path('cadastrar-autor/', cadastrar_autor, name='cadastrar_autor'),

@@ -8,3 +8,5 @@ def cadastrar_autor(request):
     return render(request, 'cadastrar_autor.html')
 def cadastrar_genero(request):
     return render(request, 'cadastrar_genero.html')
+def cadastrar_aluno(request):
+    return render(request, 'cadastrar_aluno.html')
