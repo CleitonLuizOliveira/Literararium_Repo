@@ -93,3 +93,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'  # Para produção (crie esta pasta)
 
 # Default primary key
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Add pasta para medias
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

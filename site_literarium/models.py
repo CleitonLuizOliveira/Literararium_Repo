@@ -66,3 +66,14 @@ class Genero(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Livro(models.Model):
+    titulo = models.CharField(max_length=200)
+    autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
+    genero = models.ForeignKey(Genero, on_delete=models.SET_NULL, null=True)
+    quantidade = models.PositiveIntegerField()
+    sinopse = models.TextField()
+    capa = models.ImageField(upload_to='capas/', null=True, blank=True)
+
+    def __str__(self):
+        return self.titulo

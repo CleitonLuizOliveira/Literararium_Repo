@@ -1,8 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import AlunoForm
-from .forms import AutorForm
-from .forms import BibliotecarioCreationForm
-from .forms import GeneroForm
+from .forms import AlunoForm, AutorForm, BibliotecarioCreationForm, GeneroForm, LivroForm
 
 
 def cadastrar_livro(request):
@@ -49,3 +46,13 @@ def cadastrar_bibliotecario(request):
         form = BibliotecarioCreationForm()
 
     return render(request, 'template_cadastrar_bibliotecario.html', {'form': form})
+
+def cadastrar_livro(request):
+    if request.method == 'POST':
+        form = LivroForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('cadastrar_livro')
+    else:
+        form = LivroForm()
+    return render(request, 'cadastrar_livro.html', {'form': form})

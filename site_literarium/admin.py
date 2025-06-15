@@ -1,11 +1,8 @@
 from django.contrib import admin
-from .models import Autor
-from .models import Aluno
-from .models import Bibliotecario
+from .models import Aluno, Autor, Bibliotecario, Genero, Livro
 
-admin.site.register(Bibliotecario)
-
-
-admin.site.register(Autor)
 admin.site.register(Aluno)
-
+admin.site.register(Autor)
+admin.site.register(Bibliotecario)
+admin.site.register(Genero)
+admin.site.register(Livro)

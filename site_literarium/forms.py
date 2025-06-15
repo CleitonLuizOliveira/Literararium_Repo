@@ -1,5 +1,5 @@
 from django import forms
-from .models import Aluno, Bibliotecario, Autor, Genero
+from .models import Aluno, Bibliotecario, Autor, Genero, Livro
 
 class AutorForm(forms.ModelForm):
     class Meta:
@@ -73,4 +73,14 @@ class GeneroForm(forms.ModelForm):
         }
         labels = {
             'nome': 'Gênero'
+        }
+
+class LivroForm(forms.ModelForm):
+    class Meta:
+        model = Livro
+        fields = ['titulo', 'autor', 'genero', 'quantidade', 'sinopse', 'capa']
+        widgets = {
+            'autor': forms.Select(attrs={'class': 'select-autocomplete'}),
+            'genero': forms.Select(attrs={'class': 'select-autocomplete'}),
+            'capa': forms.FileInput(attrs={'class': 'form-control-file', 'id': 'cover-file'})
         }

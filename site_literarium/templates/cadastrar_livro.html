@@ -3,6 +3,23 @@
 {% block title %}Cadastro de Livro{% endblock %}
 
 {% block content %}
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<style>
+    .select2-container--default .select2-selection--single {
+        height: 42px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        padding: 6px 10px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 28px;
+    }
+</style>
+
 <div class="container">
     <div class="title">
         <svg viewBox="0 0 87 19" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -11,10 +28,11 @@
         <h1>Cadastrar Livro</h1>
     </div>
 
-    <form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="form-group">
             <label class="form-label" for="titulo">Título</label>
-            <input type="text" id="titulo" name="titulo" placeholder="Digite o título do livro" autocomplete="off" />
+            {{ form.titulo }}
         </div>
 
         <div class="form-group">
@@ -30,7 +48,7 @@
                     </svg>
                 </a>
             </label>
-            <input type="text" id="autor" name="autor" placeholder="Digite o nome do autor" autocomplete="off" />
+            {{ form.autor }}
         </div>
 
         <div class="container2">
@@ -47,18 +65,18 @@
                         </svg>
                     </a>
                 </label>
-                <input type="text" id="genero" name="genero" placeholder="Ex: Romance, Ficção, etc." autocomplete="off" />
+                {{ form.genero }}
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="quantidade">Quantidade</label>
-                <input type="number" id="quantidade" name="quantidade" min="0" placeholder="0" />
+                {{ form.quantidade }}
             </div>
         </div>
 
         <div class="form-group">
             <label class="form-label" for="sinopse">Sinopse</label>
-            <textarea id="sinopse" name="sinopse" placeholder="Escreva uma breve sinopse do livro"></textarea>
+            {{ form.sinopse }}
         </div>
 
         <label class="cover-upload" tabindex="0" aria-label="Anexar capa do livro">
@@ -70,17 +88,29 @@
                          M13.25 11.1379L19.5 7.33046M13.25 11.1379V2"
                       stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
-            <p>Clique ou arraste para anexar a capa</p>
-            <input type="file" id="cover-file" name="cover-file" accept="image/*" />
+            <p id="upload-text">Clique ou arraste para anexar a capa</p>
+            {{ form.capa }}
         </label>
 
         <button type="submit">Salvar</button>
     </form>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script>
     const coverUpload = document.querySelector('.cover-upload');
-    const fileInput = document.getElementById('cover-file');
+    const fileInput = document.querySelector('.cover-upload input[type="file"]');
+    const uploadText = document.getElementById('upload-text');
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length) {
+            uploadText.textContent = fileInput.files[0].name;
+        } else {
+            uploadText.textContent = "Clique ou arraste para anexar a capa";
+        }
+    });
 
     coverUpload.addEventListener('dragover', (e) => {
         e.preventDefault();
@@ -100,7 +130,16 @@
         coverUpload.style.backgroundColor = '#fafafa';
         if (e.dataTransfer.files.length) {
             fileInput.files = e.dataTransfer.files;
+            uploadText.textContent = e.dataTransfer.files[0].name;
         }
+    });
+
+    $(document).ready(function () {
+        $('.select-autocomplete').select2({
+            width: '100%',
+            placeholder: 'Selecione uma opção',
+            allowClear: true
+        });
     });
 </script>
 {% endblock %}
