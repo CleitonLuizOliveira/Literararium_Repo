@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .forms import AutorForm
+from django.shortcuts import render, redirect
+from .forms import AlunoForm
 
 def cadastrar_livro(request):
     return render(request, 'cadastrar_livro.html')
@@ -16,5 +16,14 @@ def cadastrar_autor(request):
     return render(request, 'cadastrar_autor.html', {'form': form})
 def cadastrar_genero(request):
     return render(request, 'cadastrar_genero.html')
+
 def cadastrar_aluno(request):
-    return render(request, 'cadastrar_aluno.html')
+    if request.method == 'POST':
+        form = AlunoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('cadastrar_aluno') 
+    else:
+        form = AlunoForm()
+    return render(request, 'cadastrar_aluno.html', {'form': form})
+
