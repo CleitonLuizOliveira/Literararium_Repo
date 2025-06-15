@@ -11,40 +11,19 @@
         <h1>Cadastrar Autor</h1>
     </div>
 
-    <form>
+    <form method="post">
+        {% csrf_token %}
         <div class="form-group">
-            <label class="form-label" for="titulo">Autor</label>
-            <input type="text" id="autor" name="autor" placeholder="Digite o nome do autor" autocomplete="off" />
+            {{ form.nome.label_tag }}
+            {{ form.nome }}
+            {% if form.nome.errors %}
+                <div class="form-errors">
+                    {{ form.nome.errors }}
+                </div>
+            {% endif %}
         </div>
-       
 
         <button type="submit">Salvar</button>
     </form>
 </div>
-
-<script>
-    const coverUpload = document.querySelector('.cover-upload');
-    const fileInput = document.getElementById('cover-file');
-
-    coverUpload.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        coverUpload.style.borderColor = '#f98125';
-        coverUpload.style.backgroundColor = '#fff7eb';
-    });
-
-    coverUpload.addEventListener('dragleave', (e) => {
-        e.preventDefault();
-        coverUpload.style.borderColor = '#ccc';
-        coverUpload.style.backgroundColor = '#fafafa';
-    });
-
-    coverUpload.addEventListener('drop', (e) => {
-        e.preventDefault();
-        coverUpload.style.borderColor = '#ccc';
-        coverUpload.style.backgroundColor = '#fafafa';
-        if (e.dataTransfer.files.length) {
-            fileInput.files = e.dataTransfer.files;
-        }
-    });
-</script>
 {% endblock %}
