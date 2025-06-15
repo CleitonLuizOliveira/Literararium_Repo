@@ -1,5 +1,5 @@
 from django import forms
-from .models import Aluno, Bibliotecario
+from .models import Aluno, Bibliotecario, Autor
 
 class AutorForm(forms.ModelForm):
     class Meta:
