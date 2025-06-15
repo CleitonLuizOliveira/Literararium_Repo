@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import AlunoForm
+from .forms import AutorForm
 from .forms import BibliotecarioCreationForm
 
 def cadastrar_livro(request):
