@@ -60,3 +60,9 @@ class Bibliotecario(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+class Genero(models.Model):
+    nome = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nome

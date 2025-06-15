@@ -1,5 +1,5 @@
 from django import forms
-from .models import Aluno, Bibliotecario, Autor
+from .models import Aluno, Bibliotecario, Autor, Genero
 
 class AutorForm(forms.ModelForm):
     class Meta:
@@ -57,3 +57,20 @@ class BibliotecarioCreationForm(forms.ModelForm):
         if commit:
             usuario.save()
         return usuario
+
+
+class GeneroForm(forms.ModelForm):
+    class Meta:
+        model = Genero
+        fields = ['nome']
+        widgets = {
+            'nome': forms.TextInput(attrs={
+                'class': 'form-input',
+                'placeholder': 'Digite o nome do Gênero',
+                'autocomplete': 'off',
+                'id': 'genero'
+            })
+        }
+        labels = {
+            'nome': 'Gênero'
+        }
