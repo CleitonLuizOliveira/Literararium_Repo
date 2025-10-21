@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils import timezone 
 
 class Aluno(models.Model):
     nome = models.CharField(max_length=200)
@@ -74,6 +75,73 @@ class Livro(models.Model):
     quantidade = models.PositiveIntegerField()
     sinopse = models.TextField()
     capa = models.ImageField(upload_to='capas/', null=True, blank=True)
+    
+    # Relação Observer: Alunos (Observers) na lista de espera do Livro (Subject)
+    lista_espera = models.ManyToManyField(
+        Aluno, 
+        related_name='livros_em_espera', 
+        blank=True,
+        verbose_name="Alunos na lista de espera"
+    )
 
     def __str__(self):
         return self.titulo
+
+    # --- Implementação do Padrão Observer ---
+
+    def emprestar_livro(self):
+        """ Tenta emprestar o livro. Retorna True se bem-sucedido, False se não houver estoque. """
+        if self.quantidade > 0:
+            self.quantidade -= 1
+            self.save()
+            return True
+        return False
+
+    def devolver_livro(self):
+        """ Devolve um livro ao acervo e notifica a lista de espera se o livro estava esgotado. """
+        # Verifica se o livro estava esgotado (quantidade == 0) ANTES de adicionar
+        notificar = (self.quantidade == 0)
+        
+        self.quantidade += 1
+        self.save()
+
+        # Se estava esgotado (e agora não está mais), notifica os observadores
+        if notificar:
+            self.notificar_alunos()
+
+    def adicionar_aluno(self, aluno):
+        """ Adiciona um aluno (Observer) à lista de espera, se o livro estiver esgotado. """
+        if self.quantidade == 0:
+            self.lista_espera.add(aluno)
+            return True # Aluno adicionado à lista
+        return False # Livro disponível, não precisa de lista de espera
+
+    def notificar_alunos(self):
+        """ Notifica todos os Alunos (Observers) na lista de espera. """
+        alunos_na_lista = self.lista_espera.all()
+        
+        for aluno in alunos_na_lista:
+            # Cria um objeto de notificação (forma de testar a notificação)
+            mensagem = f"O livro '{self.titulo}' que você estava aguardando está disponível!"
+            Notificacao.objects.create(
+                aluno=aluno, 
+                livro=self, 
+                mensagem=mensagem
+            )
+            
+            # (Opcional) Log no console
+            print(f"Notificando {aluno.nome}: {mensagem}")
+
+        # Limpa a lista de espera após notificar
+        self.lista_espera.clear()
+
+
+class Notificacao(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name='notificacoes')
+    livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
+    mensagem = models.CharField(max_length=255)
+    data_criacao = models.DateTimeField(auto_now_add=True)
+    lida = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Notificação para {self.aluno.nome} sobre {self.livro.titulo}"
